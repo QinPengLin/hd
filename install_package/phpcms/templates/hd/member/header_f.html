@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="{WEB_PATH}statics/hd/css/base.css">
+<link rel="stylesheet" href="{WEB_PATH}statics/hd/css/video-js.min.css">
+<link rel="stylesheet" href="{WEB_PATH}statics/hd/css/style.css">
+<link rel="shortcut icon" href="{WEB_PATH}statics/hd/images/favicon.ico">
+</head>
+<body class="bg_343  h100over">
+<!-- 头部 -->
+<header id="header">
+
+    <!-- pc header -->
+    <div class="row w1200 header-box">
+        <div class="fl login2">
+            <a href="/" >
+                <!-- logo -->
+                <img src="{WEB_PATH}statics/hd/images/icon/icon-logo-big.png" alt="黄逗">
+            </a>
+        </div>
+
+        <!-- 登录注册 -->
+        <!-- <div class="fr row btn-box">
+            <a class="btn-login" href="#">登录</a>
+            <a class="btn-register" href="#">注册</a>
+        </div> -->
+
+        <!-- 已登陆 -->
+        <div class="fr row is-login-pc">
+            <a href="javascript:;">
+                <span>D</span>{L('hellow')} {get_nickname()}
+            </a>
+        </div>
+
+        <!-- 导航 -->
+        <nav class="fr" id="nav">
+            <ul>
+                {pc:content action="category" catid="0" num="8" order="listorder ASC"}
+                {loop $data $key $val}
+                <li>
+                    <a href="{$val['url']}">{$val['catname']}</a>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+        </nav>
+    </div>
+
+    <!-- mobile header -->
+    <div class="mo-header">
+        <div class="menu-box">
+            <ul>
+                {pc:content action="category" catid="0" num="8" order="listorder ASC"}
+                {loop $data $key $val}
+                <li>
+                    <a href="{$val['url']}">{$val['catname']}</a>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+        </div>
+        <div class="mo-h-box">
+            <a href="javascript:;" class="menu">
+                <img src="{WEB_PATH}statics/hd/images/icon/icon-menu.png" alt="" class="icon-menu">
+                <img src="{WEB_PATH}statics/hd/images/icon/icon-cancel.png" alt="" class="icon-close">
+            </a>
+
+            <img src="{WEB_PATH}statics/hd/images/icon/icon-logo.png" alt="logo" class="icon-logo">
+
+            <!--已登录 添加class  is-login 否则删除 -->
+            <a href="javascript:;" class="btn-user is-login">
+
+                <img src="{WEB_PATH}statics/hd/images/icon/icon-personal.png" alt="user" class="icon">
+
+                <span>D</span>
+            </a>
+
+            <div class="h-center-menu">
+                <a <?php  if(isset($_GET['c']) && $_GET['c']=='index' && empty($_GET['a'])){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index" >账号信息</a>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='account_manage_password'){ ?>class="active"<?php } ?>  href="/index.php?m=member&c=index&a=account_manage_password&t=1">修改密码</a>
+                <a href="#pay">充值升级</a>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='promote'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=promote">代理推广</a>
+            </div>
+        </div>
+
+    </div>
+
+</header>

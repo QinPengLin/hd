@@ -1,0 +1,92 @@
+{template "content","header_t"}
+<style>
+    .load-more a{
+        display: inline-block;
+        padding: 0 5px;
+        height: 26px;
+        line-height: 26px;
+        border: 1px solid;
+    }
+    .load-more span{
+        display: inline-block;
+        padding: 0 5px;
+        height: 26px;
+        line-height: 26px;
+        border: 1px solid;
+    }
+</style>
+{template "content","header_f"}
+
+<!-- main -->
+<main class="w1200" id="main">
+
+    <!--   banner 1  and  mobile -->
+    <div class="banner-img mo-banner">
+        <a href="#">
+            <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+        </a>
+    </div>
+
+    <!--  banner2  -->
+    <div class="banner-img">
+        <a href="#">
+            <img src="{WEB_PATH}statics/hd/images/image-advertise2.png" alt="">
+        </a>
+    </div>
+
+    <div class="i-con">
+        <div class="con1"></div>
+        <div class="con2"></div>
+    </div>
+    <div id="content" class="fiction">
+        {pc:content action="lists" catid="$catid" num="15" order="id DESC" page="$page" moreinfo="1"}
+        <div class="clearfix list"><!--  list start -->
+            <table>
+                {loop $data $r}
+                <tr>
+                    <td>
+                        <a href="{$r[url]}" target="_blank"><span>{$r[title]}</span></a>
+                        <?php if(!empty($r[readpoint]) && $r[readpoint]>0){?>
+                        <em>（会员支付{$r[readpoint]}观看）</em>
+                        <?php } ?>
+                    </td>
+                </tr>
+                {/loop}
+            </table>
+        </div><!-- end list -->
+
+        <!-- 加载更多 -->
+        <div class="load-more">
+            {$pages}
+        </div>
+        {/pc}
+
+    </div>
+
+
+
+</main>
+
+{template "content","foot_t"}
+<script>
+    $(function(){
+        var isScroll = true; //是否可以滚动
+       // var loadMore = $(".load-more");
+
+        $(window).scroll(function(e){
+            var scrollTop = $(window).scrollTop();
+            var dh = $(document).outerHeight();
+            var wh = $(window).height();
+
+            if(dh - wh - scrollTop <= 120 && isScroll){
+                isScroll = false;
+                loadData();
+            }else if(dh - wh - scrollTop > 230 && !isScroll){
+                isScroll = true;
+                //loadMore.text('加载中...');
+            }
+
+        })
+    })
+</script>
+{template "content","foot_f"}
