@@ -2,11 +2,11 @@
 
 return array (
 	'default' => array (
-		'hostname' => '119.29.79.64',
+		'hostname' => '45.63.74.183',
 		'port' => 3306,
 		'database' => 'hdcms',
-		'username' => 'qin',
-		'password' => '!QinPengLin1991',
+		'username' => 'root',
+		'password' => 'Ri5e)#!4k*0F',
 		'tablepre' => 'hd_',
 		'charset' => 'utf8',
 		'type' => 'mysqli',
