@@ -27,30 +27,40 @@
         </ul>
     </div>
     <div class="u-box">
-        <div class="r1 num-box" id="number">
+
+        <div class="r1" id="pwd">
             <div class="u-r-title">
-                账号名称
+                支付确认
             </div>
-            <div class="u-r-con">
-                {if $memberinfo['nickname']} {$memberinfo['nickname']} {else} {$memberinfo['username']}{/if}
-                <a class='btn-out' href="{APP_PATH}index.php?m=member&c=index&a=logout">注销账号</a>
-            </div>
-            <div class="u-r-title">
-                账号邮箱
-            </div>
-            <div class="u-r-con">
-                {if $memberinfo['email']}（{$memberinfo['email']}）{/if}
-            </div>
-            <div class="u-r-title">
-                积分数量
-            </div>
-            <div class="u-r-con">
-                {$memberinfo[point]}
+            <div class="u-r-con pwd-box">
+                <!-- 添加class  show 显示 -->
+                <div class="u-r-title">
+                    费用
+                </div>
+                <div class="u-r-con">
+                    {$factory_info['money']}元
+                </div>
+                <div class="u-r-title">
+                    合计
+                </div>
+                <div class="u-r-con">
+                    {$factory_info['price']}元
+                </div>
+                <div class="u-r-title">
+                    支付方式
+                </div>
+                <div class="u-r-con">
+                    {$factory_info['payment']}
+                </div>
+                <br />
+                {$code}
             </div>
         </div>
+
     </div>
 
 
 </main>
+
 {template 'member', 'footer_t'}
 {template 'member', 'footer_f'}

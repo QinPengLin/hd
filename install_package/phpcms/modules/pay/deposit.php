@@ -161,7 +161,7 @@ class deposit extends foreground {
 				pc_base::load_app_class('pay_factory','',0);
 				$payment_handler = new pay_factory($pay_name, $cfg);
 				$payment_handler->set_productinfo($product_info)->set_orderinfo($order_info)->set_customerinfo($customer_info);
-				$code = $payment_handler->get_code('value="'.L('confirm_pay').'" class="button"');	
+				$code = $payment_handler->get_code('value="'.L('confirm_pay').'" class="btn-sub"');
 			} else {
 				$this->account_db->update(array('status'=>'waitting','pay_type'=>'offline'),array('id'=>$recordid));
 				$code = '<div class="point">'.L('pay_tip').'</div>';

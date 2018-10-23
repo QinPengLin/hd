@@ -65,7 +65,7 @@ function mk_pay_btn($data,$attr='class="payment-show"',$ishow='1') {
 	if(is_array($data)){
 		foreach ($data as $v) {
 			$pay_type .= '<label '.$attr.'>';
-			$pay_type .='<input name="pay_type" type="radio" value="'.$v['pay_id'].'"> <em>'.$v['name'].'</em>';
+			$pay_type .='<input style="-webkit-appearance: radio;" name="pay_type" type="radio" value="'.$v['pay_id'].'"> <em>'.$v['name'].'</em>';
 			$pay_type .=$ishow ? '<span class="payment-desc">'.$v['pay_desc'].'</span>' :'';
 			$pay_type .= '</label>';
 		}

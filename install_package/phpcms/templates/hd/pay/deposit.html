@@ -1,0 +1,96 @@
+{template 'member', 'header_t'}
+{template 'member', 'header_f'}
+<!-- main -->
+<main class="w1200 user-center" id="main">
+    <div class="u-left">
+        <div class="u-title">账号管理</div>
+        <ul>
+            <li>
+                <a <?php  if(isset($_GET['c']) && $_GET['c']=='index' && empty($_GET['a'])){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index" >账号信息</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='account_manage_password'){ ?>class="active"<?php } ?>  href="/index.php?m=member&c=index&a=account_manage_password&t=1">修改密码</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && ($_GET['a']=='pay' || $_GET['a']=='pay_recharge')){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=pay">在线充值</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='init'){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=init">支付记录</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='change_credit'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=change_credit">积分兑换</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='promote'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=promote">代理推广</a>
+                <span class="icon">积分获取</span>
+            </li>
+        </ul>
+    </div>
+    <div class="u-box">
+
+        <form name="myform" action="{APP_PATH}index.php?m=pay&c=deposit&a=pay_recharge" method="post" id="myform">
+        <div class="r1" id="pwd">
+            <div class="u-r-title">
+                在线充值
+            </div>
+            <div class="u-r-con pwd-box">
+                <!-- 添加class  show 显示 -->
+                <div class="u-r-title">
+                    余额
+                </div>
+                <div class="u-r-con">
+                    {$memberinfo['amount']}元
+                </div>
+
+                <div class="u-r-title">
+                    充值金额
+                </div>
+                <input style="width: 150px;" type="text" class="input" name="info[price]" value="{if is_numeric($_GET['price'])}{$_GET['price']}{/if}" placeholder="充值金额">
+
+
+                <div class="u-r-title">
+                    支付方式
+                </div>
+                <div class="u-r-con" style="font-size: 14px;">
+                    {if $pay_types}{mk_pay_btn($pay_types,'',0)}{else}本站暂未开启在线支付功能，如需帮助请联系管理员。{/if}
+                </div>
+
+
+                <div class="lable show">
+                    E-mail
+                </div>
+                <input type="email" class="input" name="info[email]" value="{$memberinfo['email']}" placeholder="E-mail">
+
+                <div class="lable show">
+                    姓 名
+                </div>
+                <input type="text" name="info[name]" value="{$memberinfo['username']}" class="input" placeholder="姓 名">
+
+                <div class="lable show">
+                    电 话
+                </div>
+                <input type="tel" name="info[telephone]" class="input" placeholder="电 话">
+                <div class="lable show">
+                    备 注
+                </div>
+                <textarea name="info[usernote]" class="input" style="width: 90%;height: 100px;margin-top: 5px;" name=""></textarea>
+                <div class="lable show">
+                    验证码
+                </div>
+                <input type="tel" name="code" style="width: 200px;margin-bottom: 10px;" class="input" placeholder="验证码">
+                <br />
+                {form::checkcode('code_img','4','14',110,30)}
+                <br />
+                <input type="hidden" name="dosubmit"  value="确 定" class="button"/>
+                <button class="btn-sub">确定</button>
+            </div>
+        </div>
+        </form>
+
+    </div>
+
+
+</main>
+
+{template 'member', 'footer_t'}
+{template 'member', 'footer_f'}

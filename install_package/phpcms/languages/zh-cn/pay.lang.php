@@ -123,14 +123,14 @@ $LANG['admin_recharge'] = '后台充值';
 /******************pay status********************/
 $LANG['all_status'] = '全部状态';
 
-$LANG['unpay'] = '<font color="red" class="onError">交易未支付</font>';
-$LANG['succ'] = '<font color="green" class="onCorrect">交易成功</font>';
+$LANG['unpay'] = '<font  class="onError">交易未支付</font>';
+$LANG['succ'] = '<font  class="onCorrect">交易成功</font>';
 $LANG['failed'] = '交易失败';
 $LANG['error'] = '交易错误';
-$LANG['progress'] = '<font color="orange" class="onTime">交易处理中</font>';
+$LANG['progress'] = '<font  class="onTime">交易处理中</font>';
 $LANG['timeout'] = '交易超时';
 $LANG['cancel'] = '交易取消';
-$LANG['waitting'] = '<font color="orange" class="onTime">等待付款</font>';
+$LANG['waitting'] = '<font  class="onTime">等待付款</font>';
 
 $LANG['select']['unpay'] = '交易未支付';
 $LANG['select']['succ'] = '交易成功';

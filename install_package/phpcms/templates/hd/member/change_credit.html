@@ -1,0 +1,91 @@
+{template 'member', 'header_t'}
+{template 'member', 'header_f'}
+<style>
+    .pay-btn{
+        margin-top: 5px;
+    }
+</style>
+<!-- main -->
+<main class="w1200 user-center" id="main">
+    <div class="u-left">
+        <div class="u-title">账号管理</div>
+        <ul>
+            <li>
+                <a <?php  if(isset($_GET['c']) && $_GET['c']=='index' && empty($_GET['a'])){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index" >账号信息</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='account_manage_password'){ ?>class="active"<?php } ?>  href="/index.php?m=member&c=index&a=account_manage_password&t=1">修改密码</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && ($_GET['a']=='pay' || $_GET['a']=='pay_recharge')){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=pay">在线充值</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='init'){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=init">支付记录</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='change_credit'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=change_credit">积分兑换</a>
+            </li>
+            <li>
+                <a <?php  if(isset($_GET['a']) && $_GET['a']=='promote'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=promote">代理推广</a>
+                <span class="icon">积分获取</span>
+            </li>
+        </ul>
+    </div>
+    <div class="u-box">
+
+        <div class="r1" id="pwd">
+            <div class="u-r-title">
+                购买积分
+            </div>
+
+
+            <form method="post" action="" id="myform" name="myform">
+            <div class="u-r-con pwd-box">
+                <!-- 添加class  show 显示 -->
+                <div class="u-r-title">
+                    {L('account_remain')}
+                </div>
+                <div class="u-r-con" style="font-size: 18px;">
+                    <font style=" font-size:18px;font-family:Georgia,Arial; font-weight:700">{$memberinfo[amount]}</font>{L('unit_yuan')}，
+                    <font style=" font-size:12px;font-family:Georgia,Arial; font-weight:700">{$memberinfo[point]}</font>{L('unit_point')}
+                </div>
+                <div class="u-r-title">
+                    {L('cost')}
+                </div>
+                <div class="u-r-con" style="font-size: 18px;">
+                    <input type="text" class="input" style="width: 200px;" name="money" id="money" size="4"> &nbsp;{L('unit_yuan')}
+                    {L('can_change_point_num')}：<font id="point" style=" font-size:12px;font-family:Georgia,Arial; font-weight:700">0</font>{L('unit_point')}
+                    <font id="alert" style=" font-size:12px;font-family:Georgia,Arial; font-weight:700"></font>
+                </div>
+                <br />
+                <input type="submit" class="btn-sub" name="buy" value="兑换">
+            </div>
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+</main>
+
+{template 'member', 'footer_t'}
+<script language="JavaScript">
+    <!--
+    $(document).ready(function() {
+        $("#point").html($("#money").val()*{if !empty($member_setting['rmb_point_rate'])}{$member_setting['rmb_point_rate']}{else}10{/if});
+            $("#money").keyup(function() {
+                $(this).val($(this).val().replace(/[^\d]/g,''));
+                $("#point").html($("#money").val()*{if !empty($member_setting['rmb_point_rate'])}{$member_setting['rmb_point_rate']}{else}10{/if});
+                    if({$memberinfo[amount]} < $(this).val()) {
+                        $("#alert").html('{L('not_sufficient_funds')}');
+                    } else {
+                        $("#alert").html('');
+                    }
+                });
+            });
+    //-->
+</script>
+{template 'member', 'footer_f'}
