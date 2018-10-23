@@ -44,7 +44,7 @@ return array(
 
 'phpsso' => '1',	//是否使用phpsso
 'phpsso_appid' => '1',	//应用id	
-'phpsso_api_url' => 'http://wwe.108293.com/phpsso_server',	//接口地址
+'phpsso_api_url' => 'http://hd.qinpl.cn/phpsso_server',	//接口地址
 'phpsso_auth_key' => 'F8UT9xYothIu9xvkMPR5aCanpnM259xg', //加密密钥
 'phpsso_version' => '1', //phpsso版本
 
