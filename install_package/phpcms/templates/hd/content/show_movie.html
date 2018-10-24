@@ -30,12 +30,19 @@
 
                 <!-- 已登录 -->
 
-
-
+                {if $allow_visitor==1}
                     <video style="width:100%; height:100%; object-fit: fill;" id="myVideo" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="300" height="250">
                         <source id="source" src="{$musource}" type="application/x-mpegURL">
                     </video>
-
+                {else}
+                <!-- 未登录时 显示  内容只有部分 -->
+                <div class="no-player">
+                    观看本视频之前需要支付
+                    <span>{$readpoint} {if $paytype}元{else}点{/if}</span>
+                    ，
+                    <a href="{APP_PATH}index.php?m=content&c=readpoint&allow_visitor={$allow_visitor}">支付</a>
+                </div>
+                {/if}
 
             </div>
         </div>

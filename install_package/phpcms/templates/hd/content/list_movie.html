@@ -24,8 +24,21 @@
     <div id="content">
         <div class="clearfix list"><!--  list start -->
 
-            {pc:content action="lists" catid="$catid" num="15" order="id DESC" page="$page" moreinfo="1"}
-            {loop $data $r}
+            {pc:content action="lists" catid="$catid" num="16" order="id DESC" page="$page" moreinfo="1"}
+            <?php
+            if(count($data)>8){
+                $ondata=array_slice($data,0,8);
+                $twdata=array_slice($data,8,(count($data)-1));
+            }else{
+                if(count($data)==0){
+                    $ondata=array();
+                }else{
+                    $ondata=array_slice($data,0,(count($data)-1));
+                }
+                $twdata=array();
+            }
+            ?>
+            {loop $ondata $r}
             <div class="item">
                 <a href="{$r[url]}">
                     <img src="{$r[thumb]}" class="thumb" alt="">
@@ -40,7 +53,6 @@
                 </a>
             </div>
             {/loop}
-            {/pc}
         </div><!-- end list -->
 
 
@@ -51,84 +63,29 @@
             </a>
         </div>
 
-
+        <?php if(!empty($twdata)){  ?>
         <div class="clearfix list"><!--  list start -->
+            {loop $twdata $r}
             <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
+                <a href="{$r[url]}">
+                    <img src="{$r[thumb]}" class="thumb" alt="">
                     <header>
-                        <h1 class="text-over">电影名电影</h1>
+                        <h1 class="text-over">{$r[title]}</h1>
+                        <?php if(!empty($r[readpoint]) && $r[readpoint]>0){?>
+                        <div class="color-orange">需要积分：{$r[readpoint]}</div>
+                        <?php }else{ ?>
                         <div>游客观看</div>
+                        <?php } ?>
                     </header>
                 </a>
             </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="{WEB_PATH}statics/hd/images/image-video1.png" class="thumb" alt="">
-                    <header>
-                        <h1  class="text-over">电影名电影</h1>
-                        <div class="color-orange">需要积分：150</div>
-                    </header>
-                </a>
-            </div>
+            {/loop}
         </div><!-- end list -->
+        <?php } ?>
+        {/pc}
 
         <!-- 加载更多 -->
-        <div class="load-more">加载中...</div>
+        <div class="load-more">{$pages}</div>
 
     </div>
 
