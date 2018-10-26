@@ -71,7 +71,7 @@ var pc_hash = '<?php echo $_SESSION['pc_hash']?>'
     </div>
     <div class="col-auto">
     	<div class="log white cut_line">
-           
+            <?php echo L('hello'),$admin_username?>  [<?php echo $rolename?>]<span>|</span><a href="?m=admin&c=index&a=public_logout">[<?php echo L('exit')?>]</a><span>|</span>
     		<a href="<?php echo $currentsite['domain']?>" target="_blank" id="site_homepage"><?php echo L('site_homepage')?></a><span>|</span>
     		<a href="?m=member" target="_blank"><?php echo L('member_center')?></a><span>|</span>
     		<a href="?m=search" target="_blank" id="site_search"><?php echo L('search')?></a>
