@@ -231,7 +231,7 @@ class deposit extends foreground {
             if($json["status"]==="SUCCESS"){
                 header("Location: ".$json["page_url"]);
             }else{
-                showmessage('支付失败！');
+                showmessage('支付失败！'.$json["message"]);
             }
             //print_r($retval);
         }
