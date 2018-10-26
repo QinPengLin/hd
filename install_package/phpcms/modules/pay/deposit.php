@@ -226,11 +226,14 @@ class deposit extends foreground {
             $payid = http_build_query($data);
             $url = $cf['iiiapi_api_url']."?_____t=".time()."&".$payid;
             $retval = httpPost($url,$data);
-            print_r($retval);
+
             $json = json_decode($retval,true);
             if($json["status"]==="SUCCESS"){
                 header("Location: ".$json["page_url"]);
+            }else{
+                showmessage('支付失败！');
             }
+            //print_r($retval);
         }
     }
 	public function public_checkcode() {
