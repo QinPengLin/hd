@@ -66,9 +66,9 @@
                     <tr>
                         <td align="center">{$grouplist[$groupid]['name']}</td>
                         <td align="center">
-                            <input type="radio" name='upgrade_type' value="0
-" checked>{$grouplist[$groupid]['price_y']}/{L('year')}<br /><input type="radio" name='upgrade_type' value="1
-">{$grouplist[$groupid]['price_m']}/{L('month')}<br /><input type="radio" name='upgrade_type' value="2
+                            <input type="radio" style="-webkit-appearance: radio;" name='upgrade_type' value="0
+" checked>{$grouplist[$groupid]['price_y']}/{L('year')}<br /><input style="-webkit-appearance: radio;" type="radio" name='upgrade_type' value="1
+">{$grouplist[$groupid]['price_m']}/{L('month')}<br /><input style="-webkit-appearance: radio;" type="radio" name='upgrade_type' value="2
 ">{$grouplist[$groupid]['price_d']}/{L('day')}</td>
                         <td align="center"><input type="text" name="upgrade_date" id="upgrade_date" class="input-text" size="4"><font color="red" id="unit">{L('year')}</font></td>
                         <td align="center"><span id="cost">0</span> {L('unit_yuan')}<span id="pay" style="display:none">，<a href="index.php?m=pay&c=deposit&a=pay"><font color="red" id="unit">点击充值</font></a></span></td>
