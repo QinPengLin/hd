@@ -1,0 +1,175 @@
+{template "content","header_t"}
+<link rel="stylesheet" href="http://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css" />
+<script type="text/javascript" charset="utf-8" src="http://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-min.js"></script>
+{template "content","header_f"}
+
+<!-- main -->
+<main class="w1200 detail" id="main">
+
+    <!--   banner 1  and  mobile -->
+    <div class="banner-img mo-banner detail-mo-banner">
+        <a href="#">
+            <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+        </a>
+    </div>
+
+    <div id="content" class="clearfix ">
+        <div class="fl d-left">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise10.png" alt="">
+            </a>
+        </div>
+
+        <div class="fl d-center">
+            <div class="breadcrumb">
+                <ul>
+                    <li>{$CAT[catname]}</li>
+                    <li><?php echo $data_xv->cntitle; ?></li>
+                </ul>
+            </div>
+            <div class="no-player" >
+
+                <!-- 已登录 -->
+
+                <div id="player-con"></div>
+                <script>
+
+                    var player = new Aliplayer({
+                            "id": "player-con",
+                            "source": "<?php echo $data_xv->hls; ?>",
+                            "width": "100%",
+                            "height": "100%",
+                            "autoplay": false,
+                            "isLive": false,
+                            "cover": "<?php echo $data_xv->thumb[0]; ?>",
+                            "rePlay": false,
+                            "playsinline": true,
+                            "preload": true,
+                            "controlBarVisibility": "hover",
+                            "useH5Prism": true,
+                            "skinLayout": [
+                                {
+                                    "name": "bigPlayButton",
+                                    "align": "cc"
+
+                                },
+                                {
+                                    "name": "H5Loading",
+                                    "align": "cc"
+                                },
+                                {
+                                    "name": "errorDisplay",
+                                    "align": "tlabs",
+                                    "x": 0,
+                                    "y": 0
+                                },
+                                {
+                                    "name": "infoDisplay"
+                                },
+                                {
+                                    "name": "tooltip",
+                                    "align": "blabs",
+                                    "x": 0,
+                                    "y": 56
+                                },
+                                {
+                                    "name": "thumbnail"
+                                },
+                                {
+                                    "name": "controlBar",
+                                    "align": "blabs",
+                                    "x": 0,
+                                    "y": 0,
+                                    "children": [
+                                        {
+                                            "name": "progress",
+                                            "align": "blabs",
+                                            "x": 0,
+                                            "y": 44
+                                        },
+                                        {
+                                            "name": "playButton",
+                                            "align": "tl",
+                                            "x": 15,
+                                            "y": 12
+                                        },
+                                        {
+                                            "name": "timeDisplay",
+                                            "align": "tl",
+                                            "x": 10,
+                                            "y": 7
+                                        },
+                                        {
+                                            "name": "fullScreenButton",
+                                            "align": "tr",
+                                            "x": 10,
+                                            "y": 12
+                                        },
+                                        {
+                                            "name": "setting",
+                                            "align": "tr",
+                                            "x": 15,
+                                            "y": 12
+                                        },
+                                        {
+                                            "name": "volume",
+                                            "align": "tr",
+                                            "x": 5,
+                                            "y": 10
+                                        }
+                                    ]
+                                }
+                            ]
+                        }, function (player) {
+                            console.log("播放器创建了。");
+                        }
+                    );
+                </script>
+
+
+            </div>
+        </div>
+        <div class="fr d-right">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise10.png" alt="">
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt20">
+        <!--   banner 1  and  mobile -->
+        <div class="banner-img mo-banner">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+            </a>
+        </div>
+
+        <!--   banner 1  and  mobile -->
+        <div class="banner-img mo-banner">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+            </a>
+        </div>
+
+
+        <!--   banner 1  and  mobile -->
+        <div class="banner-img mo-banner">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+            </a>
+        </div>
+
+
+        <!--   banner 1  and  mobile -->
+        <div class="banner-img mo-banner">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+            </a>
+        </div>
+
+
+    </div>
+
+</main>
+{template "content","foot_t"}
+{template "content","foot_f"}

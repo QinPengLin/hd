@@ -35,6 +35,40 @@ class index {
 		$catid = intval($_GET['catid']);
 		$id = intval($_GET['id']);
 
+        $wc=$_GET['wc'];
+        if(isset($wc) && !empty($wc) && $wc==1){
+            $siteids = getcache('category_content','commons');
+            $siteid = $siteids[$catid];
+            $CATEGORYS = getcache('category_content_'.$siteid,'commons');
+            if(!isset($CATEGORYS[$catid]) || $CATEGORYS[$catid]['type']!=0) showmessage(L('information_does_not_exist'),'blank');
+            $this->category = $CAT = $CATEGORYS[$catid];
+            $this->category_setting = $CAT['setting'] = string2array($this->category['setting']);
+
+
+            $_groupid = param::get_cookie('_groupid');
+            $_groupid = intval($_groupid);
+            if(!$_groupid) {
+                $forward = urlencode(get_url());
+                showmessage(L('login_website'),APP_PATH.'index.php?m=member&c=index&a=login&forward='.$forward);
+            }
+            if(!in_array($_groupid,[2,3,5])) showmessage(L('no_priv'));
+
+            $template = $template ? $template : $CAT['setting']['show_template'];
+            if(!$template) $template = 'show';
+
+            $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
+            $id = $_GET['id'];
+            $data_xv = $mongodb->getId($id);
+            $data_xv=$data_xv[0];
+
+
+
+            include template('content',$template);
+            exit();
+
+
+        }
+
 		if(!$catid || !$id) showmessage(L('information_does_not_exist'),'blank');
 		$_userid = $this->_userid;
 		$_username = $this->_username;
@@ -225,6 +259,103 @@ class index {
 		$siteid = $GLOBALS['siteid'] = $CAT['siteid'];
 		extract($CAT);
 		$setting = string2array($setting);
+
+        if($setting['meta_title']=='xvideos'){//如果在META Title（栏目标题）针对搜索引擎设置的标题设置为xvideos就进入
+            $template = $setting['category_template'] ? $setting['category_template'] : 'category';
+            $template_list = $setting['list_template'] ? $setting['list_template'] : 'list';
+            $template = $child ? $template : $template_list;
+
+            $page = intval($_GET['page']);
+
+            $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
+            $data = $mongodb->page([],$page,16,['createTime'=>1]);
+
+            $data_v=array();
+            $i=0;
+            foreach($data['data'] as $v) {
+                if(!empty($v)){
+                    $ob_id=json_encode($v->_id);
+                    $ob_id=json_decode($ob_id,true);
+                    $data_v[$i]['id']=$ob_id['$oid'];
+                    $data_v[$i]['thumb']=$v->thumb;
+                    $data_v[$i]['cntitle']=$v->cntitle;
+                    $data_v[$i]['cntitle']=$v->cntitle;
+                    $data_v[$i]['url']='index.php?m=content&c=index&a=show&catid='.$catid.'&id='.$ob_id['$oid'].'&wc=1';
+                    $i++;
+                }
+            }
+
+///index.php?m=content&c=index&a=show&catid=16&id=46
+
+            $pge_str='';
+            if(!empty($data)){
+                $url='/index.php?m=content&c=index&a=lists&catid='.$catid.'&page=';
+                $pge_str='<a>'.$data['count'].'条</a>';
+
+                if($page<1 || $page==1){
+                    $s_c=1;
+                }else{
+                    $s_c=$page-1;
+                }
+                $s_ye=$url.$s_c;//上一页
+                $s_ye_str='<a href="'.$s_ye.'" class="a1">上一页</a>';
+
+                if($page>$data['page'] || $page==$data['page']){
+                    $x_c=$data['page'];
+                }else{
+                    $x_c=$page+1;
+                }
+                $x_ye=$url.$x_c;//下一页
+                $x_ye_str='<a href="'.$x_ye.'" class="a1">下一页</a>';
+
+                if($page<4){//后补齐
+                    $qiamn_buqi='';
+                    for ($x=0; $x<($page-1); $x++) {//前页
+                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
+                    }
+                    $mes='<span>'.$page.'</span>';
+                    $hou_buqi='';
+                    for ($x=($page+1); $x<($page+1)+(7-$page); $x++) {//后页
+                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+
+                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                }
+                if(($page>4 || $page==4) && ($page<($data['page']-3))){//中间位
+                    $qiamn_buqi='';
+                    for ($x=($page-3); $x<$page; $x++) {//前页
+                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $mes='<span>'.$page.'</span>';
+                    $hou_buqi='';
+                    for ($x=($page+1); $x<($page+4); $x++) {//后页
+                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                }
+                if($page>($data['page']-4)){//后位
+                    $qiamn_buqi='';
+                    for ($x=($data['page']-6); $x<$page; $x++) {//前页
+                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $mes='<span>'.$page.'</span>';
+                    $hou_buqi='';
+                    for ($x=($page+1); $x<($data['page']+1); $x++) {//后页
+                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                }
+                $pge_str=$pge_str.$s_ye_str.$re_page.$x_ye_str;
+                $pge_str=$pge_str.'<a>共'.$data['page'].'页</a>';
+
+
+            }
+
+
+            include template('content',$template);
+            exit();
+        }
+
 		//SEO
 		if(!$setting['meta_title']) $setting['meta_title'] = $catname;
 		$SEO = seo($siteid, '',$setting['meta_title'],$setting['meta_description'],$setting['meta_keywords']);

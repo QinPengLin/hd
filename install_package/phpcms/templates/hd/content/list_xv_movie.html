@@ -1,0 +1,114 @@
+{template "content","header_t"}
+{template "content","header_f"}
+<style>
+    .load-more a {
+        display: inline-block;
+        padding: 0 5px;
+        height: 26px;
+        line-height: 26px;
+        border: 1px solid;
+        margin-left: 5px;
+    }
+    .load-more span {
+        margin-left: 5px;
+        display: inline-block;
+        padding: 0 5px;
+        height: 26px;
+        line-height: 26px;
+        border: 1px solid;
+    }
+</style>
+<!-- main -->
+<main class="w1200" id="main">
+
+    <!--   banner 1  and  mobile -->
+    <div class="banner-img mo-banner">
+        <a href="#">
+            <img src="{WEB_PATH}statics/hd/images/image-advertise1.png" alt="">
+        </a>
+    </div>
+
+    <!--  banner2  -->
+    <div class="banner-img">
+        <a href="#">
+            <img src="{WEB_PATH}statics/hd/images/image-advertise2.png" alt="">
+        </a>
+    </div>
+
+    <div class="i-con">
+        <div class="con1"></div>
+        <div class="con2"></div>
+    </div>
+    <div id="content">
+        <div class="clearfix list"><!--  list start -->
+
+            <?php
+            if(count($data_v)>8){
+            $ondata=array_slice($data_v,0,8);
+            $twdata=array_slice($data_v,8,(count($data_v)-1));
+            }else{
+            if(count($data_v)==0){
+            $ondata=array();
+            }else{
+            $ondata=array_slice($data_v,0,(count($data_v)-1));
+            }
+            $twdata=array();
+            }
+            foreach ($ondata as $r) {
+
+            ?>
+            <div class="item">
+                <a href="<?php
+                echo $r['url'];
+                ?>">
+                    <img src="<?php echo $r['thumb'][0]; ?>" class="thumb" alt="">
+                    <header>
+                        <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
+                        <div class="color-orange">会员观看</div>
+                    </header>
+                </a>
+            </div>
+            <?php } ?>
+        </div><!-- end list -->
+
+
+        <!-- banner -->
+        <div class="banner-img mo-banner mb30">
+            <a href="#">
+                <img src="{WEB_PATH}statics/hd/images/image-advertise2.png" alt="">
+            </a>
+        </div>
+
+        <?php if(!empty($twdata)){  ?>
+        <div class="clearfix list"><!--  list start -->
+            <?php
+            foreach ($twdata as $r) {
+            ?>
+            <div class="item">
+                <a href="<?php
+                echo $r['url'];
+                ?>">
+                    <img src="<?php echo $r['thumb'][0]; ?>" class="thumb" alt="">
+                    <header>
+                        <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
+                        <div class="color-orange">会员观看</div>
+                    </header>
+                </a>
+            </div>
+            <?php } ?>
+        </div><!-- end list -->
+        <?php } ?>
+
+
+        <!-- 加载更多 -->
+        <div class="load-more">
+            <?php echo $pge_str; ?>
+        </div>
+
+    </div>
+
+
+
+</main>
+{template "content","foot_t"}
+{template "content","foot_f"}
