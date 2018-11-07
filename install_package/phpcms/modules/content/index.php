@@ -279,7 +279,7 @@ class index {
                     $data_v[$i]['id']=$ob_id['$oid'];
                     $data_v[$i]['thumb']=$v->thumb;
                     $data_v[$i]['cntitle']=$v->cntitle;
-                    $data_v[$i]['cntitle']=$v->cntitle;
+                    $data_v[$i]['durString']=$v->durString;
                     $data_v[$i]['url']='index.php?m=content&c=index&a=show&catid='.$catid.'&id='.$ob_id['$oid'].'&wc=1';
                     $i++;
                 }
