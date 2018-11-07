@@ -209,7 +209,7 @@ class index extends foreground {
 						showmessage(L('operation_success'), 'index.php?m=member&c=index&a=register&t=2');
 					} else {
 						//如果不需要邮箱认证、直接登录其他应用
-						$synloginstr = $this->client->ps_member_synlogin($userinfo['phpssouid']);
+						//$synloginstr = $this->client->ps_member_synlogin($userinfo['phpssouid']);
 						showmessage(L('operation_success').$synloginstr, 'index.php?m=member&c=index&a=init');
 					}
 					
