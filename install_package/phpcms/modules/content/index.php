@@ -45,20 +45,33 @@ class index {
             $this->category_setting = $CAT['setting'] = string2array($this->category['setting']);
 
 
-            $_groupid = param::get_cookie('_groupid');
-            $_groupid = intval($_groupid);
-            if(!$_groupid) {
-                $forward = urlencode(get_url());
-                showmessage(L('login_website'),APP_PATH.'index.php?m=member&c=index&a=login&forward='.$forward);
-            }
-            if(!in_array($_groupid,[4,5,6])) showmessage(L('no_priv'));
-
-            $template = $template ? $template : $CAT['setting']['show_template'];
-            if(!$template) $template = 'show';
-
             $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
             $id = $_GET['id'];
             $data_xv = $mongodb->getId($id);
+            if(!$data_xv){
+                showmessage('异常或者无数据','blank');
+            }
+            //$data_xv->hls
+            $xq_data=$data_xv[0];
+            $pageurlst=$xq_data->pageUrl;
+            $m_calss=getFreeClass();//获取免费分类
+            if(strpos($pageurlst,$m_calss) == false) {//如果不是免费的就进行会员权限识别
+                $_groupid = param::get_cookie('_groupid');
+                $_groupid = intval($_groupid);
+                if (!$_groupid) {
+                    $forward = urlencode(get_url());
+                    showmessage(L('login_website'), APP_PATH . 'index.php?m=member&c=index&a=login&forward=' . $forward);
+                }
+
+                if (!in_array($_groupid, [4, 5, 6])) showmessage(L('no_priv'));
+
+            }
+                $template = $template ? $template : $CAT['setting']['show_template'];
+                if (!$template) $template = 'show';
+
+
+
+
             $data_xv=$data_xv[0];
 
 
@@ -309,17 +322,31 @@ class index {
                 $x_ye_str='<a href="'.$x_ye.'" class="a1">下一页</a>';
 
                 if($page<4){//后补齐
-                    $qiamn_buqi='';
-                    for ($x=0; $x<($page-1); $x++) {//前页
-                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
-                    }
-                    $mes='<span>'.$page.'</span>';
-                    $hou_buqi='';
-                    for ($x=($page+1); $x<($page+1)+(7-$page); $x++) {//后页
-                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
-                    }
+                    if($data['page']>7){
+                        $qiamn_buqi='';
+                        for ($x=0; $x<($page-1); $x++) {//前页
+                            $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
+                        }
+                        $mes='<span>'.$page.'</span>';
+                        $hou_buqi='';
+                        for ($x=($page+1); $x<($page+1)+(7-$page); $x++) {//后页
+                            $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                        }
 
-                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                        $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                    }else{
+                        $qiamn_buqi='';
+                        for ($x=0; $x<($page-1); $x++) {//前页
+                            $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
+                        }
+                        $mes='<span>'.$page.'</span>';
+                        $hou_buqi='';
+                        for ($x=($page+1); $x<($data['page']+1); $x++) {//后页
+                            $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                        }
+
+                        $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                    }
                 }
                 if(($page>4 || $page==4) && ($page<($data['page']-3))){//中间位
                     $qiamn_buqi='';
@@ -333,7 +360,7 @@ class index {
                     }
                     $re_page=$qiamn_buqi.$mes.$hou_buqi;
                 }
-                if($page>($data['page']-4)){//后位
+                if($page>($data['page']-4)  && $data['page']>7){//后位
                     $qiamn_buqi='';
                     for ($x=($data['page']-6); $x<$page; $x++) {//前页
                         $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';

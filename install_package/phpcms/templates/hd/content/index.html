@@ -1,5 +1,11 @@
 {template "content","header_t"}
 {template "content","header_f"}
+<?php
+
+   $frst=indexFreeSh(10,10);
+   $frsto=$frst[0];
+   $frstt=$frst[1];
+?>
 <!-- main -->
 <main class="w1200" id="main">
 
@@ -22,25 +28,25 @@
         <div class="con2"></div>
     </div>
     <div id="content">
-        {pc:content action="lists" catid="17" num="8" order="id DESC" return="info"}
+
         <div class="clearfix list"><!--  list start -->
-            {loop $info $r}
+            <?php
+            foreach ($frsto as $r) {
+            ?>
             <div class="item">
-                <a href="{$r[url]}">
-                    <img src="{$r[thumb]}" class="thumb" alt="">
+                <a href="<?php
+                echo $r['url'];
+                ?>">
+                    <img src="<?php echo $r['thumb'][0]; ?>" class="thumb" alt="">
                     <header>
-                        <h1 class="text-over">{$r[title]}</h1>
-                        <?php if(!empty($r[readpoint]) && $r[readpoint]>0){?>
-                        <div class="color-orange">需要积分：{$r[readpoint]}</div>
-                        <?php }else{ ?>
-                        <div>游客观看</div>
-                        <?php } ?>
+                        <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
+                        <div class="color-orange">游客观看</div>
+                        <div class="color-orange">时长<?php echo $r['durString']; ?></div>
                     </header>
                 </a>
             </div>
-            {/loop}
+            <?php } ?>
         </div><!-- end list -->
-        {/pc}
 
         <!-- banner -->
         <div class="banner-img mo-banner mb30">
@@ -48,27 +54,25 @@
                 <img src="{WEB_PATH}statics/hd/images/image-advertise2.png" alt="">
             </a>
         </div>
-
-
-        {pc:content action="lists" catid="19" num="8" order="id DESC" return="infos"}
         <div class="clearfix list"><!--  list start -->
-            {loop $infos $r}
+            <?php
+            foreach ($frstt as $r) {
+            ?>
             <div class="item">
-                <a href="{$r[url]}">
-                    <img src="{$r[thumb]}" class="thumb" alt="">
+                <a href="<?php
+                echo $r['url'];
+                ?>">
+                    <img src="<?php echo $r['thumb'][0]; ?>" class="thumb" alt="">
                     <header>
-                        <h1 class="text-over">{$r[title]}</h1>
-                        <?php if(!empty($r[readpoint]) && $r[readpoint]>0){?>
-                        <div class="color-orange">需要积分：{$r[readpoint]}</div>
-                        <?php }else{ ?>
-                        <div>游客观看</div>
-                        <?php } ?>
+                        <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
+                        <div class="color-orange">会员观看</div>
+                        <div class="color-orange">时长<?php echo $r['durString']; ?></div>
                     </header>
                 </a>
             </div>
-            {/loop}
-        </div><!-- end list -->
-        {/pc}
+            <?php } ?>
+        </div>
+
 
         <!-- 加载更多 -->
         <div class="load-more"></div>
