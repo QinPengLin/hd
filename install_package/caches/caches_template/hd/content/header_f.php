@@ -28,7 +28,10 @@
         <!-- 导航 -->
         <nav class="fr" id="nav">
             <ul>
-                <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=e89f1974866f71e9af13b534d945fbf7&action=category&catid=0&num=8&order=listorder+ASC\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">修改</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('catid'=>'0','order'=>'listorder ASC','limit'=>'8',));}?>
+                <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=3d1411ab8b12cafb4cbf853b70b80a09&action=category&catid=0&num=8&order=listorder+ASC\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">修改</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('catid'=>'0','order'=>'listorder ASC','limit'=>'8',));}?>
+                <div style="display: none">
+                    <?php print_r($data); ?>
+                </div>
                 <?php $n=1; if(is_array($data)) foreach($data AS $key => $val) { ?>
                 <li
                 <?php if(empty($catid) && $key==9){ ?>  class="active"  <?php } ?>
@@ -46,7 +49,7 @@
     <div class="mo-header">
         <div class="menu-box">
             <ul>
-                <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=e89f1974866f71e9af13b534d945fbf7&action=category&catid=0&num=8&order=listorder+ASC\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">修改</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('catid'=>'0','order'=>'listorder ASC','limit'=>'8',));}?>
+                <?php if(defined('IN_ADMIN')  && !defined('HTML')) {echo "<div class=\"admin_piao\" pc_action=\"content\" data=\"op=content&tag_md5=3d1411ab8b12cafb4cbf853b70b80a09&action=category&catid=0&num=8&order=listorder+ASC\"><a href=\"javascript:void(0)\" class=\"admin_piao_edit\">修改</a>";}$content_tag = pc_base::load_app_class("content_tag", "content");if (method_exists($content_tag, 'category')) {$data = $content_tag->category(array('catid'=>'0','order'=>'listorder ASC','limit'=>'8',));}?>
                 <?php $n=1; if(is_array($data)) foreach($data AS $key => $val) { ?>
                 <li>
                     <a href="<?php echo $val['url'];?>"><?php echo $val['catname'];?></a>
