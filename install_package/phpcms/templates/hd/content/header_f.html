@@ -28,7 +28,10 @@
         <!-- 导航 -->
         <nav class="fr" id="nav">
             <ul>
-                {pc:content action="category" catid="0" num="8" siteid="$siteid" order="listorder ASC"}
+                {pc:content action="category" catid="0" num="8"  order="listorder ASC"}
+                <div style="display: none">
+                    <?php print_r($data); ?>
+                </div>
                 {loop $data $key $val}
                 <li
                 <?php if(empty($catid) && $key==9){ ?>  class="active"  <?php } ?>
@@ -46,7 +49,7 @@
     <div class="mo-header">
         <div class="menu-box">
             <ul>
-                {pc:content action="category" catid="0" num="8" siteid="$siteid" order="listorder ASC"}
+                {pc:content action="category" catid="0" num="8"  order="listorder ASC"}
                 {loop $data $key $val}
                 <li>
                     <a href="{$val['url']}">{$val['catname']}</a>
