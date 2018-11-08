@@ -65,9 +65,10 @@
                     <header>
                         <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
                         <div class="color-orange">
-                            <?php  if($setting['meta_title']=='xvideos_free'){ ?>
+                            <?php  if($setting['meta_title']=='xvideos'){ ?>
                             会员观看
-                            <?php }else{ ?>
+                            <?php }
+                            if($setting['meta_title']=='xvideos_free'){ ?>
                             游客观看
                             <?php  } ?>
                         </div>
