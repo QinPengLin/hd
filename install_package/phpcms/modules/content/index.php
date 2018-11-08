@@ -77,7 +77,7 @@ class index {
 
 
 
-
+            $xv_title=$xq_data->cntitle;
             $data_xv=$data_xv[0];
 
 
@@ -280,6 +280,7 @@ class index {
 		$setting = string2array($setting);
 
         if($setting['meta_title']=='xvideos'){//如果在META Title（栏目标题）针对搜索引擎设置的标题设置为xvideos就进入
+            $xv_title=$CAT['catname'];
             $template = $setting['category_template'] ? $setting['category_template'] : 'category';
             $template_list = $setting['list_template'] ? $setting['list_template'] : 'list';
             $template = $child ? $template : $template_list;
@@ -393,6 +394,7 @@ class index {
 
 
         if($setting['meta_title']=='xvideos_free'){//免费栏目如果在META Title（栏目标题）针对搜索引擎设置的标题设置为xvideos就进入
+            $xv_title=$CAT['catname'];
             $template = $setting['category_template'] ? $setting['category_template'] : 'category';
             $template_list = $setting['list_template'] ? $setting['list_template'] : 'list';
             $template = $child ? $template : $template_list;
