@@ -21,7 +21,7 @@ return array (
     'hits' => '0',
     'setting' => '{"workflowid":"","ishtml":"1","content_ishtml":"1","create_to_html_root":"0","template_list":"hd","category_template":"category_movie","list_template":"list_movie","show_template":"show_movie","meta_title":"","meta_keywords":"","meta_description":"","presentpoint":"1","defaultchargepoint":"0","paytype":"0","repeatchargedays":"1","category_ruleid":"1","show_ruleid":"11"}',
     'listorder' => '9',
-    'ismenu' => '1',
+    'ismenu' => '0',
     'sethtml' => '0',
     'letter' => 'yazhoudianying',
     'usable_type' => '',
