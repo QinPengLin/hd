@@ -383,6 +383,127 @@ class index {
             exit();
         }
 
+
+
+
+        if($setting['meta_title']=='xvideos_free'){//免费栏目如果在META Title（栏目标题）针对搜索引擎设置的标题设置为xvideos就进入
+            $template = $setting['category_template'] ? $setting['category_template'] : 'category';
+            $template_list = $setting['list_template'] ? $setting['list_template'] : 'list';
+            $template = $child ? $template : $template_list;
+
+            $page = intval($_GET['page']);
+
+            $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
+            $zf=getFreeClass();
+            $p=[
+                'pageUrl' => ['$in' => [new \MongoDB\BSON\Regex('^.*?'.$zf.'.*?$','i')]]
+            ];
+//            $data = $mongodb->page($p,$page,16,['createTime'=>-1]);
+//            print_r($data);
+//            exit();
+            $data = $mongodb->page($p,$page,16,['createTime'=>-1]);
+
+            $data_v=array();
+            $i=0;
+            foreach($data['data'] as $v) {
+                if(!empty($v)){
+                    $ob_id=json_encode($v->_id);
+                    $ob_id=json_decode($ob_id,true);
+                    $data_v[$i]['id']=$ob_id['$oid'];
+                    $data_v[$i]['thumb']=$v->thumb;
+                    $data_v[$i]['cntitle']=$v->cntitle;
+                    $data_v[$i]['cntitle']=$v->cntitle;
+                    $data_v[$i]['durString']=$v->durString;
+                    $data_v[$i]['url']='index.php?m=content&c=index&a=show&catid='.$catid.'&id='.$ob_id['$oid'].'&wc=1';
+                    $i++;
+                }
+            }
+
+///index.php?m=content&c=index&a=show&catid=16&id=46
+
+            $pge_str='';
+            if(!empty($data)){
+                $url='/index.php?m=content&c=index&a=lists&catid='.$catid.'&page=';
+                $pge_str='<a>'.$data['count'].'条</a>';
+
+                if($page<1 || $page==1){
+                    $s_c=1;
+                }else{
+                    $s_c=$page-1;
+                }
+                $s_ye=$url.$s_c;//上一页
+                $s_ye_str='<a href="'.$s_ye.'" class="a1">上一页</a>';
+
+                if($page>$data['page'] || $page==$data['page']){
+                    $x_c=$data['page'];
+                }else{
+                    $x_c=$page+1;
+                }
+                $x_ye=$url.$x_c;//下一页
+                $x_ye_str='<a href="'.$x_ye.'" class="a1">下一页</a>';
+
+                if($page<4){//后补齐
+                    if($data['page']>7){
+                        $qiamn_buqi='';
+                        for ($x=0; $x<($page-1); $x++) {//前页
+                            $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
+                        }
+                        $mes='<span>'.$page.'</span>';
+                        $hou_buqi='';
+                        for ($x=($page+1); $x<($page+1)+(7-$page); $x++) {//后页
+                            $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                        }
+
+                        $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                    }else{
+                        $qiamn_buqi='';
+                        for ($x=0; $x<($page-1); $x++) {//前页
+                            $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.($x+1).'">'.($x+1).'</a>';
+                        }
+                        $mes='<span>'.$page.'</span>';
+                        $hou_buqi='';
+                        for ($x=($page+1); $x<($data['page']+1); $x++) {//后页
+                            $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                        }
+
+                        $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                    }
+                }
+                if(($page>4 || $page==4) && ($page<($data['page']-3))){//中间位
+                    $qiamn_buqi='';
+                    for ($x=($page-3); $x<$page; $x++) {//前页
+                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $mes='<span>'.$page.'</span>';
+                    $hou_buqi='';
+                    for ($x=($page+1); $x<($page+4); $x++) {//后页
+                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                }
+                if($page>($data['page']-4) && $data['page']>7){//后位
+                    $qiamn_buqi='';
+                    for ($x=($data['page']-6); $x<$page; $x++) {//前页
+                        $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $mes='<span>'.$page.'</span>';
+                    $hou_buqi='';
+                    for ($x=($page+1); $x<($data['page']+1); $x++) {//后页
+                        $hou_buqi=$hou_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+                    }
+                    $re_page=$qiamn_buqi.$mes.$hou_buqi;
+                }
+                $pge_str=$pge_str.$s_ye_str.$re_page.$x_ye_str;
+                $pge_str=$pge_str.'<a>共'.$data['page'].'页</a>';
+
+
+            }
+
+
+            include template('content',$template);
+            exit();
+        }
+
 		//SEO
 		if(!$setting['meta_title']) $setting['meta_title'] = $catname;
 		$SEO = seo($siteid, '',$setting['meta_title'],$setting['meta_description'],$setting['meta_keywords']);
