@@ -45,9 +45,15 @@ class index {
             $this->category_setting = $CAT['setting'] = string2array($this->category['setting']);
 
 
-            $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
-            $id = $_GET['id'];
-            $data_xv = $mongodb->getId($id);
+            try {
+                $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
+                $id = $_GET['id'];
+                $data_xv = $mongodb->getId($id);
+            }
+            catch (Exception $e) {
+                showmessage('异常或者无数据','blank');
+            }
+
             if(!$data_xv){
                 showmessage('异常或者无数据','blank');
             }
