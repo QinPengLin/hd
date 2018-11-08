@@ -268,7 +268,7 @@ class index {
             $page = intval($_GET['page']);
 
             $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
-            $data = $mongodb->page([],$page,16,['createTime'=>1]);
+            $data = $mongodb->page([],$page,16,['createTime'=>-1]);
 
             $data_v=array();
             $i=0;

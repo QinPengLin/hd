@@ -1904,9 +1904,9 @@ class MongodbClient{
         }
         $skip = ($page-1)*$limit;
         $options = [
+            'sort' => $sort,//根据user_id字段排序 1是升序，-1是降序
             'skip'=>$skip,
-            'limit'    => $limit,
-            'sort' => $sort//根据user_id字段排序 1是升序，-1是降序
+            'limit'    => $limit
         ];
         $data['data'] = $this->query($where,$options);
         $data['page'] = $endpage;
