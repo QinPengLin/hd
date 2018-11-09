@@ -99,7 +99,14 @@
                     <img src="<?php echo $r['thumb'][0]; ?>" class="thumb" alt="">
                     <header>
                         <h1 class="text-over"><?php echo $r['cntitle']; ?></h1>
-                        <div class="color-orange">会员观看</div>
+                        <div class="color-orange">
+                            <?php  if($setting['meta_title']=='xvideos'){ ?>
+                            会员观看
+                            <?php }
+                            if($setting['meta_title']=='xvideos_free'){ ?>
+                            游客观看
+                            <?php  } ?>
+                        </div>
                         <div class="color-orange">时长<?php echo $r['durString']; ?></div>
                     </header>
                 </a>
