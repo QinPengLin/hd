@@ -1988,12 +1988,12 @@ function getChargeClass(){
 function classColumns(){
     return array(
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=asian'=>'亚洲人',
-        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japonesa'=>'日本人',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japanese'=>'日本语',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=wife'=>'妻子',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=daughter'=>'女儿',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=upskirt'=>'超短裙',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=boobs'=>'乳房',
-        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japanese'=>'日本语',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japonesa'=>'日本人',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=creampie'=>'内射',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=squirting'=>'颜射',
         '/index.php?m=content&c=index&a=lists&catid=10&lxa=lesbo'=>'女同',
