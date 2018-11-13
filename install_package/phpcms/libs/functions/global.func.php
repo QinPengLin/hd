@@ -1983,6 +1983,29 @@ function getChargeClass(){
 }
 
 /**
+ * 分类栏目
+ */
+function classColumns(){
+    return array(
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=asian'=>'亚洲人',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japonesa'=>'日本人',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=wife'=>'妻子',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=daughter'=>'女儿',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=upskirt'=>'超短裙',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=boobs'=>'乳房',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=japanese'=>'日本语',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=creampie'=>'内射',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=squirting'=>'颜射',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=lesbo'=>'女同',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=sexy'=>'性感',
+        '/index.php?m=content&c=index&a=lists&catid=10&lxa=porn'=>'色情',
+        '/html/Anovel/'=>'激情小说',
+        '/index.php?m=content&c=index&a=lists&catid=22'=>'免费观看',
+        '/index.php?m=content&c=index&a=lists&catid=10'=>'全部'
+        );
+}
+
+/**
  * 首页免费观看显示数据
  */
 function indexFreeSh($cid,$cidt){

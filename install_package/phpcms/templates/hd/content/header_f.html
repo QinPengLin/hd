@@ -1,7 +1,47 @@
+<style>
+    #main{
+       margin-top: 150px;
+    }
+    .fra{
+        background: #d9d9d9;
+        border: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        color: #000;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 26px;
+        margin: 0;
+        padding: 0 6px;
+        text-shadow: none;
+        white-space: normal;
+        margin: 0 2px 4px 0;
+        border-width: 1px;
+        -webkit-transition: background ease .2s,border ease .2s,-webkit-box-shadow ease .2s;
+        transition: background ease .2s,border ease .2s,-webkit-box-shadow ease .2s;
+        -o-transition: box-shadow ease .2s,background ease .2s,border ease .2s;
+        -moz-transition: box-shadow ease .2s,background ease .2s,border ease .2s,-moz-box-shadow ease .2s;
+        transition: box-shadow ease .2s,background ease .2s,border ease .2s;
+        transition: box-shadow ease .2s,background ease .2s,border ease .2s,-webkit-box-shadow ease .2s,-moz-box-shadow ease .2s;
+    }
+    .lis{
+        display: -moz-inline-stack;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+        margin: 0 2px 5px 0;
+        padding: 0;
+    }
+</style>
 </head>
 <body class="bg_343 pb100">
 <!-- 头部 -->
-<header id="header">
+<header id="header" style="height: auto;">
 
     <!-- pc header -->
     <div class="row w1200 header-box">
@@ -26,36 +66,21 @@
         </div>
 
         <!-- 导航 -->
-        <nav class="fr" id="nav">
-            <ul>
-                {pc:content action="category" catid="0" num="8"  order="listorder ASC"}
-                <div style="display: none">
-                    <?php print_r($data); ?>
-                </div>
-                {loop $data $key $val}
-                <li
-                <?php if(empty($catid) && $key==9){ ?>  class="active"  <?php } ?>
-                <?php if($key==$catid){ ?>  class="active"  <?php } ?>
-                ><!--  active 选中 -->
-                    <a href="{$val['url']}">{$val['catname']}</a>
-                </li>
-                {/loop}
-                {/pc}
+        <nav class="fr" id="nav" style="width: 85%;margin-top: 30px;">
+          <?php $data_nav=classColumns(); foreach ($data_nav as $k=>$v){ ?>
+            <li class="lis"><a class="fra" href="<?php echo $k; ?>"><?php echo $v; ?></a></li>
+          <?php } ?>
             </ul>
         </nav>
     </div>
 
     <!-- mobile header -->
     <div class="mo-header">
-        <div class="menu-box">
+        <div class="menu-box" style="overflow:scroll;">
             <ul>
-                {pc:content action="category" catid="0" num="8"  order="listorder ASC"}
-                {loop $data $key $val}
-                <li>
-                    <a href="{$val['url']}">{$val['catname']}</a>
-                </li>
-                {/loop}
-                {/pc}
+                <?php foreach ($data_nav as $k=>$v){ ?>
+                <li ><a  href="<?php echo $k; ?>"><?php echo $v; ?></a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="mo-h-box">

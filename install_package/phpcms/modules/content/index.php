@@ -288,7 +288,15 @@ class index {
             $page = intval($_GET['page']);
 
             $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
-            $data = $mongodb->page([],$page,16,['createTime'=>-1]);
+            if(isset($_GET['lxa']) && !empty($_GET['lxa'])){
+                $p=[
+                    'pageUrl' => ['$in' => [new \MongoDB\BSON\Regex('^.*?'.$_GET['lxa'].'.*?$','i')]]
+                ];
+            }else{
+                $p=[];
+            }
+
+            $data = $mongodb->page($p,$page,16,['createTime'=>-1]);
 
             $data_v=array();
             $i=0;
