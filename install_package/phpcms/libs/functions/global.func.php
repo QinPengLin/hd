@@ -2023,7 +2023,7 @@ function classColumns(){
  * 首页显示所有并且分页
  */
 function indexFreeShAll($cid){
-   
+
 
     $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
     $p=[];
@@ -2061,6 +2061,7 @@ function indexFreeShAll($cid){
         }
         $pge_str=$pge_str.$mes.$qiamn_buqi.$x_ye_str.'<a>共'.$data['page'].'页</a>';
     }
+    return array($data_v,$pge_str);
 }
 
 /**

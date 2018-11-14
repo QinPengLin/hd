@@ -2,7 +2,9 @@
 {template "content","header_f"}
 <?php
 
-   $data_v=indexFreeShAll(10);
+   $data=indexFreeShAll(10);
+   $data_v=$data[0];
+   $pge_str=$data[1];
 ?>
 <style>
     .load-more a {
