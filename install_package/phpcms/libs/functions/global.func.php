@@ -2023,6 +2023,8 @@ function classColumns(){
  * 首页显示所有并且分页
  */
 function indexFreeSh($cid){
+    echo 'no';
+    exit();
 
     $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
     $p=[];
