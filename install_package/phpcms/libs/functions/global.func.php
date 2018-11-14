@@ -1967,6 +1967,20 @@ class MongodbClient{
 
 }
 
+/**
+ * 返回免费观看电影部数
+ */
+function returnFreeWatch(){
+    return 10;
+}
+
+/**
+ * 设置免费观看的json数据
+ */
+function setJson($id){
+
+}
+
 
 /**
  * 获取配置免费观看分类（目前先写死）
@@ -2003,6 +2017,49 @@ function classColumns(){
         '/index.php?m=content&c=index&a=lists&catid=22'=>'免费观看',
         '/index.php?m=content&c=index&a=lists&catid=10'=>'全部'
         );
+}
+
+/**
+ * 首页显示所有并且分页
+ */
+function indexFreeSh($cid){
+
+    $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
+    $p=[];
+
+    $data = $mongodb->page($p,0,16,['createTime'=>-1]);
+
+    $data_v=array();
+    $i=0;
+    foreach($data['data'] as $v) {
+        if(!empty($v)){
+            $ob_id=json_encode($v->_id);
+            $ob_id=json_decode($ob_id,true);
+            $data_v[$i]['id']=$ob_id['$oid'];
+            $data_v[$i]['thumb']=$v->thumb;
+            $data_v[$i]['cntitle']=$v->cntitle;
+            $data_v[$i]['durString']=$v->durString;
+            $data_v[$i]['url']='index.php?m=content&c=index&a=show&catid='.$cid.'&id='.$ob_id['$oid'].'&wc=1';
+            $i++;
+        }
+    }
+
+
+    $pge_str='';
+    if(!empty($data)){
+        $url='/index.php?m=content&c=index&a=lists&catid='.$cid.'&page=';
+        $pge_str='<a>'.$data['count'].'条</a>';
+
+
+        $x_ye=$url.'2';//下一页
+        $x_ye_str='<a href="'.$x_ye.'" class="a1">下一页</a>';
+        $mes='<span>1</span>';//当前叶
+        $qiamn_buqi='';
+        for ($x=2; $x<8; $x++) {//前页
+            $qiamn_buqi=$qiamn_buqi.'<a href="'.$url.$x.'">'.$x.'</a>';
+        }
+        $pge_str=$pge_str.$mes.$qiamn_buqi.$x_ye_str.'<a>共'.$data['page'].'页</a>';
+    }
 }
 
 /**
