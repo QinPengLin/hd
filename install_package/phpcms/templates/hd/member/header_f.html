@@ -2,10 +2,50 @@
 <link rel="stylesheet" href="{WEB_PATH}statics/hd/css/video-js.min.css">
 <link rel="stylesheet" href="{WEB_PATH}statics/hd/css/style.css">
 <link rel="shortcut icon" href="{WEB_PATH}statics/hd/images/favicon.ico">
+<style>
+    #main{
+        margin-top: 150px;
+    }
+    .fra{
+        background: #d9d9d9;
+        border: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        color: #000;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 26px;
+        margin: 0;
+        padding: 0 6px;
+        text-shadow: none;
+        white-space: normal;
+        margin: 0 2px 4px 0;
+        border-width: 1px;
+        -webkit-transition: background ease .2s,border ease .2s,-webkit-box-shadow ease .2s;
+        transition: background ease .2s,border ease .2s,-webkit-box-shadow ease .2s;
+        -o-transition: box-shadow ease .2s,background ease .2s,border ease .2s;
+        -moz-transition: box-shadow ease .2s,background ease .2s,border ease .2s,-moz-box-shadow ease .2s;
+        transition: box-shadow ease .2s,background ease .2s,border ease .2s;
+        transition: box-shadow ease .2s,background ease .2s,border ease .2s,-webkit-box-shadow ease .2s,-moz-box-shadow ease .2s;
+    }
+    .lis{
+        display: -moz-inline-stack;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+        margin: 0 2px 5px 0;
+        padding: 0;
+    }
+</style>
 </head>
-<body class="bg_343  h100over">
+<body class="bg_343 pb100">
 <!-- 头部 -->
-<header id="header">
+<header id="header" style="height: auto;">
 
     <!-- pc header -->
     <div class="row w1200 header-box">
@@ -24,36 +64,27 @@
 
         <!-- 已登陆 -->
         <div class="fr row is-login-pc">
-            <a href="javascript:;">
-                <span>D</span>{L('hellow')} {get_nickname()}
+            <a href="/index.php?m=member&c=index">
+                <span>D</span>个人中心
             </a>
         </div>
 
         <!-- 导航 -->
-        <nav class="fr" id="nav">
-            <ul>
-                {pc:content action="category" catid="0" num="8" order="listorder ASC"}
-                {loop $data $key $val}
-                <li>
-                    <a href="{$val['url']}">{$val['catname']}</a>
-                </li>
-                {/loop}
-                {/pc}
+        <nav class="fr" id="nav" style="width: 85%;margin-top: 30px;">
+            <?php $data_nav=classColumns(); foreach ($data_nav as $k=>$v){ ?>
+            <li class="lis"><a class="fra" href="<?php echo $k; ?>"><?php echo $v; ?></a></li>
+            <?php } ?>
             </ul>
         </nav>
     </div>
 
     <!-- mobile header -->
     <div class="mo-header">
-        <div class="menu-box">
-            <ul>
-                {pc:content action="category" catid="0" num="8" order="listorder ASC"}
-                {loop $data $key $val}
-                <li>
-                    <a href="{$val['url']}">{$val['catname']}</a>
-                </li>
-                {/loop}
-                {/pc}
+        <div class="menu-box" style="overflow:scroll;">
+            <ul style="margin-top: 300px;">
+                <?php foreach ($data_nav as $k=>$v){ ?>
+                <li style="padding-bottom: 30px;"><a  href="<?php echo $k; ?>"><?php echo $v; ?></a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="mo-h-box">
@@ -65,22 +96,12 @@
             <img src="{WEB_PATH}statics/hd/images/icon/icon-logo.png" alt="logo" class="icon-logo">
 
             <!--已登录 添加class  is-login 否则删除 -->
-            <a href="javascript:;" class="btn-user is-login">
+            <a href="/index.php?m=member&c=index" class="btn-user is-login">
 
                 <img src="{WEB_PATH}statics/hd/images/icon/icon-personal.png" alt="user" class="icon">
 
                 <span>D</span>
             </a>
-
-            <div class="h-center-menu">
-                <a <?php  if(isset($_GET['c']) && $_GET['c']=='index' && empty($_GET['a'])){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index" >账号信息</a>
-                <a <?php  if(isset($_GET['a']) && $_GET['a']=='account_manage_password'){ ?>class="active"<?php } ?>  href="/index.php?m=member&c=index&a=account_manage_password&t=1">修改密码</a>
-                <a <?php  if(isset($_GET['a']) && ($_GET['a']=='pay' || $_GET['a']=='pay_recharge')){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=pay">在线充值</a>
-                <a <?php  if(isset($_GET['a']) && $_GET['a']=='init'){ ?>class="active"<?php } ?> href="/index.php?m=pay&c=deposit&a=init">支付记录</a>
-                <a <?php  if(isset($_GET['a']) && $_GET['a']=='change_credit'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=change_credit">积分兑换</a>
-                <a <?php  if(isset($_GET['a']) && $_GET['a']=='account_manage_upgrade'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=account_manage_upgrade&t=1">会员自助升级</a>
-                <a <?php  if(isset($_GET['a']) && $_GET['a']=='promote'){ ?>class="active"<?php } ?> href="/index.php?m=member&c=index&a=promote">代理推广</a>
-            </div>
         </div>
 
     </div>
