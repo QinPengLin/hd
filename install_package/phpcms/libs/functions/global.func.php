@@ -2022,9 +2022,8 @@ function classColumns(){
 /**
  * 首页显示所有并且分页
  */
-function indexFreeSh($cid){
-    echo 'no';
-    exit();
+function indexFreeShAll($cid){
+   
 
     $mongodb = new MongodbClient(['dbname'=>'porn','collection'=>'porns']);
     $p=[];
