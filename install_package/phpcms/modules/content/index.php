@@ -63,6 +63,8 @@ class index {
             $xq_data=$data_xv[0];
             $pageurlst=$xq_data->pageUrl;
             $m_calss=getFreeClass();//获取免费分类
+            $xv_title = $xq_data->cntitle;
+            $data_xv = $data_xv[0];
             if(strpos($pageurlst,$m_calss) == false) {//如果不是免费的就进行会员权限识别
                 $_groupid = param::get_cookie('_groupid');
                 $_groupid = intval($_groupid);
@@ -74,8 +76,7 @@ class index {
                 if (!in_array($_groupid, [2, 4, 5, 6])) showmessage(L('no_priv'));
 
 
-                $xv_title = $xq_data->cntitle;
-                $data_xv = $data_xv[0];
+
                 $user_id = param::get_cookie('_userid');
                 $user_datas = $this->user_db->get_one(array('userid' => $user_id));
                 if (!$user_datas) {
