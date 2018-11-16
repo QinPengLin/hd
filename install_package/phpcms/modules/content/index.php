@@ -73,34 +73,31 @@ class index {
 
                 if (!in_array($_groupid, [2, 4, 5, 6])) showmessage(L('no_priv'));
 
-            }
-                $template = $template ? $template : $CAT['setting']['show_template'];
-                if (!$template) $template = 'show';
 
-
-
-            $xv_title=$xq_data->cntitle;
-            $data_xv=$data_xv[0];
-            $user_id = param::get_cookie('_userid');
-            $user_datas=$this->user_db->get_one(array('userid'=>$user_id));
-            if(!$user_datas){
-                showmessage('用户数据异常','blank');
-            }
-            if($_groupid==2){//新手就只能免费观看多少部
-                $free_data=explode(",",$user_datas['free_watch']);
-                if(!in_array($id,$free_data)){//如果不存在就判断是否超次数
-                    if(count($free_data)>returnFreeWatch()){//超次数就提示升级会员
-                        showmessage('免费观看次数已经用完，请升级会员', APP_PATH . 'index.php?m=member&c=index&a=account_manage_upgrade&t=1');
-                    }else{//没有超次数就记录该次
-                        array_push($free_data,$id);
-                        $in_free_watch=implode(",", $free_data);
-                        $in_free_watch=trim($in_free_watch,',');
-                        $re=$this->user_db->update(['free_watch'=>$in_free_watch],array('userid'=>$user_id));
+                $xv_title = $xq_data->cntitle;
+                $data_xv = $data_xv[0];
+                $user_id = param::get_cookie('_userid');
+                $user_datas = $this->user_db->get_one(array('userid' => $user_id));
+                if (!$user_datas) {
+                    showmessage('用户数据异常', 'blank');
+                }
+                if ($_groupid == 2) {//新手就只能免费观看多少部
+                    $free_data = explode(",", $user_datas['free_watch']);
+                    if (!in_array($id, $free_data)) {//如果不存在就判断是否超次数
+                        if (count($free_data) > returnFreeWatch()) {//超次数就提示升级会员
+                            showmessage('免费观看次数已经用完，请升级会员', APP_PATH . 'index.php?m=member&c=index&a=account_manage_upgrade&t=1');
+                        } else {//没有超次数就记录该次
+                            array_push($free_data, $id);
+                            $in_free_watch = implode(",", $free_data);
+                            $in_free_watch = trim($in_free_watch, ',');
+                            $re = $this->user_db->update(['free_watch' => $in_free_watch], array('userid' => $user_id));
+                        }
                     }
                 }
             }
 
-
+            $template = $template ? $template : $CAT['setting']['show_template'];
+            if (!$template) $template = 'show';
 
             include template('content',$template);
             exit();
